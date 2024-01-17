@@ -6,11 +6,11 @@ let cursor_position = { x: -1, y: -1 };
 let center_copy = { x: -1, y: -1 };
 let fading_gradient;
 
-const source_strength = 200;
+const source_strength = 500;
 let center = { x: 35, y: 20 };
-const resolution = { x: 200, y: 200 };
+const resolution = { x: 100, y: 100 };
 let color_mask = { r: 155, g: 0, b: 255 };
-const fading_gradient_modifier = 10;
+const fading_gradient_modifier = 1;
 
 ////////////////////////////////////////////
 fading_gradient = source_strength * fading_gradient_modifier / 255;
@@ -49,7 +49,7 @@ function calcColor(i, j) {
     let light;
     if (i == center.x && j == center.y) light = source_strength;
     else {
-        light = (source_strength + fading_gradient) / Math.sqrt(Math.pow(i - center.x, 2) + Math.pow(j - center.y, 2));
+        light = source_strength / Math.sqrt(Math.pow(i - center.x, 2) + Math.pow(j - center.y, 2)) + fading_gradient / Math.pow(Math.pow(i - center.x, 2) + Math.pow(j - center.y, 2), 0.05);
         if (light > source_strength) light = source_strength
     }
 
